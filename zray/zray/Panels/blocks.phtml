@@ -1,0 +1,97 @@
+<?php
+$tableParams = array(
+	'tableId' 			=> 'zray-table-blocks',
+    'tableWidth'        => '5',
+);
+?>
+
+<?php echo $this->zrayTable($tableParams); //zrayTableHtml ?>
+
+<script type="text/javascript">
+(function() {
+	var storage = zray.getStorage('blockRender');
+
+	// create main table
+	var maintable = zray.createTable(storage, jQuery('#<?php echo $tableParams['tableId']; ?>'));
+	maintable.setColumns([
+		{
+			"label": "ID",
+			"propertyName": "bID",
+			"sortable": true,
+			"width": '15%',
+			"getHtml": function(value, record) {
+				return value;
+			}
+		},
+		{
+			"label": "Area",
+			"propertyName": "area",
+			"sortable": true,
+			"width": '15%',
+			"getHtml": function(value, record) {
+				return value;
+			}
+		},
+		{
+			"label": "Type",
+			"propertyName": "type",
+			"sortable": true,
+			"width": '15%',
+			"getHtml": function(value, record) {
+				return value;
+			}
+		},
+		{
+			"label": "Rendered",
+			"propertyName": "rendered",
+			"sortable": false,
+			"width": '10%',
+			"getHtml": function(value, record) {
+				if (value) {
+					return 'Yes';
+				} else {
+					return '<strong style="color: #f00">No</strong>';
+				}
+			}
+		},
+		{
+			"label": "Used Cache",
+			"propertyName": "cache",
+			"sortable": true,
+			"width": '15%',
+			"getHtml": function(value, record) {
+				return value;
+			}
+		},
+		{
+			"label": "Render Time (ms)",
+			"propertyName": "time",
+			"sortable": true,
+			"width": '10%',
+			"getHtml": function(value, record) {
+				return value;
+			}
+		}
+		,
+		{
+			"label": "Content",
+			"propertyName": "content",
+			"sortable": false,
+			"width": '45%',
+			"getHtml": function(value, record) {
+				return value;
+			}
+		}
+	]);
+	// create main table - end
+
+	// create pager and search
+	zray.createPager(storage, jQuery('#<?php echo $params['pagerId']; ?>'));
+	zray.createSearch(storage, jQuery('#<?php echo $params['searchId']; ?>'), maintable);
+
+	zray.registerDataHandler('concrete5', 'blockRender', function(extensionData, requestData) {
+		storage.setData(extensionData);
+	});
+
+})();
+</script>
