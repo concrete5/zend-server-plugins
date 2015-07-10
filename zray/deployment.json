@@ -1,0 +1,14 @@
+{
+  "name" : "concrete5",
+  "display_name" : "Concrete5",
+  "version" : "1.0.0",
+  "type": ["zray"],
+  "logo": "logo.png",
+  "eula": "LICENSE.TXT",
+  "readme": "README.TXT",
+  "dependencies": {
+    "plugin": {
+        "min": "1.0.0"
+    }
+  }
+}
