@@ -5,7 +5,7 @@
   <summary>concrete5 short description</summary>
   <description>concrete5 long description</description>
   <version>
-    <release>5.7.5</release>
+    <release>5.7.4.2</release>
   </version>
   <eula>data/LICENSE.TXT</eula>
   <appdir>data</appdir>
