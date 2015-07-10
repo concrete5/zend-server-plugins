@@ -52,8 +52,9 @@ class Zray
             $statistics = $cms['zray/statistics'];
             $block = $statistics->getBlockByID($data['b']->getBlockID());
             $block->setEnd(microtime(true));
-            $block->setUsedCache($context['this']->usedBlockCacheDuringRender());
-
+            if (version_compare(\Config::get('concrete.version'), '5.7.5a1', '>=')) {
+                $block->setUsedCache($context['this']->usedBlockCacheDuringRender());
+            }
             $controller = $data['b']->getController();
             if (is_object($controller) && method_exists($controller, 'getSearchableContent')) {
                 $block->setContent($controller->getSearchableContent());
@@ -117,12 +118,16 @@ class Zray
 
         $renderedBlocks = array();
         foreach($statistics->getBlocks() as $block) {
+            $usedCache = 'Unknown';
+            if (version_compare(\Config::get('concrete.version'), '5.7.5a1', '>=')) {
+                $usedCache = $block->getUsedCache();
+            }
             $renderedBlocks[] = $block->getID();
             $storage['blockRender'][] = array(
                 'bID' => $block->getID(),
                 'type' => $block->getType(),
                 'area' => $block->getAreaHandle(),
-                'cache' => $block->getUsedCache(),
+                'cache' => $usedCache,
                 'content' => $block->getContent(),
                 'time' => $block->getDisplayRenderTime(),
                 'rendered' => true
@@ -143,19 +148,21 @@ class Zray
             }
         }
 
-        if (is_object($c)) {
-            $cp = new \Permissions($c);
-            $assignments = $cp->getAllAssignmentsForPage();
-            foreach($assignments as $assignment) {
-                $pk = $assignment->getPermissionKeyObject();
-                $obj = $pk->getPermissionObject();
-                if ($obj && (!isset($lastobj) || $lastobj != $obj)) {
-                    $storage['customPagePermissions'][] = array(
-                        'Type' => $obj->getPermissionObjectKeyCategoryHandle(),
-                        'Object' => $obj->getPermissionObjectIdentifier()
-                    );
+        if (version_compare(\Config::get('concrete.version'), '5.7.5a1', '>=')) {
+            if (is_object($c)) {
+                $cp = new \Permissions($c);
+                $assignments = $cp->getAllAssignmentsForPage();
+                foreach($assignments as $assignment) {
+                    $pk = $assignment->getPermissionKeyObject();
+                    $obj = $pk->getPermissionObject();
+                    if ($obj && (!isset($lastobj) || $lastobj != $obj)) {
+                        $storage['customPagePermissions'][] = array(
+                            'Type' => $obj->getPermissionObjectKeyCategoryHandle(),
+                            'Object' => $obj->getPermissionObjectIdentifier()
+                        );
+                    }
+                    $lastobj = $obj;
                 }
-                $lastobj = $obj;
             }
         }
     }
