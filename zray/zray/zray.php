@@ -178,7 +178,7 @@ $concrete5 = new Zray();
 
 // set additional data such as logo
 $zre->setMetadata(array(
-    'logo' => __DIR__ . DIRECTORY_SEPARATOR . 'logo.png',
+    'logo' => __DIR__ . DIRECTORY_SEPARATOR . 'double_logo.png',
 ));
 
 // start tracing only when 'your_application_initial_method' is called, e.g. 'Mage::run()'
