@@ -16,7 +16,7 @@ class Module extends \ZRay\ZRayModule {
             'panels' => array(
                 'blocks' => array(
                     'display'       => true,
-                    'logo'          => 'logo.png',
+                    'logo'          => 'double_logo.png',
                     'menuTitle' 	=> 'Blocks',
                     'panelTitle'	=> 'Block Rendering',
                     'searchId' 		=> 'block-table-search',
