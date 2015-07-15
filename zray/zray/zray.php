@@ -57,7 +57,7 @@ class Zray
             }
             $controller = $data['b']->getController();
             if (is_object($controller) && method_exists($controller, 'getSearchableContent')) {
-                $block->setContent($controller->getSearchableContent());
+                $block->setContent(strip_tags($controller->getSearchableContent()));
             }
         }
     }
@@ -85,6 +85,22 @@ class Zray
         $cms = \Core::make('app');
         $statistics = $cms['zray/statistics'];
         $c = \Page::getCurrentPage();
+
+        $storage['general'][] = array(
+            'Version' => array(
+                'Core Version' => \Config::get('concrete.version'),
+                'Version Installed' => \Config::get('concrete.version_installed'),
+                'Database Version' => \Config::get('concrete.version_db')
+            ),
+            'Caching' => array(
+                'Block Cache' => \Config::get('concrete.cache.blocks') ? 'On' : 'Off',
+                'Asset Cache' => \Config::get('concrete.cache.assets') ? 'On' : 'Off',
+                'Theme CSS Cache' => \Config::get('concrete.cache.theme_css') ? 'On' : 'Off',
+                'Theme CSS Compressed' => \Config::get('concrete.theme.compress_preprocessor_output') ? 'On' : 'Off',
+                'Overrides Cache' => \Config::get('concrete.cache.overrides') ? 'On' : 'Off',
+                'Full Page Caching' => \Config::get('concrete.cache.pages') ? 'On' : 'Off',
+            )
+        );
 
         foreach($statistics->getRequestedPages() as $page) {
             $storage['pageRequests'][] = array(
