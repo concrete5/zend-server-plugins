@@ -1,101 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package version="2.0" xmlns="http://www.zend.com/server/deployment-descriptor/1.0">
-  <type>application</type>
-  <name>concrete5</name>
-  <summary>concrete5 short description</summary>
-  <description>concrete5 long description</description>
-  <version>
-    <release>5.7.4.2</release>
-  </version>
-  <eula>data/LICENSE.TXT</eula>
-  <appdir>data</appdir>
-  <docroot>data</docroot>
-  <scriptsdir>scripts</scriptsdir>
-  <healthcheck>index.php/login</healthcheck>
-  <dependencies>
-    <required>
-		<php>
-			<min>5.3.15</min>
-		</php>
-		<extension>
-			<name>pdo_mysql</name>
-		</extension>
-      <extension>
-        <name>curl</name>
-      </extension>
-      <extension>
-        <name>gd</name>
-      </extension>
-      <extension>
-        <name>json</name>
-      </extension>
-      <extension>
-        <name>simplexml</name>
-      </extension>
-      <extension>
-        <name>libxml</name>
-      </extension>
-      <extension>
-        <name>ctype</name>
-      </extension>
+    <type>application</type>
+    <name>concrete5</name>
+    <summary>concrete5 short description</summary>
+    <description>concrete5 long description</description>
+    <version>
+        <release>5.7.4.2</release>
+    </version>
+    <eula>data/LICENSE.TXT</eula>
+    <appdir>data</appdir>
+    <docroot>data</docroot>
+    <scriptsdir>scripts</scriptsdir>
+    <healthcheck>index.php/login</healthcheck>
+    <dependencies>
+        <required>
+            <php>
+                <min>5.3.15</min>
+            </php>
+            <extension>
+                <name>pdo_mysql</name>
+            </extension>
+            <extension>
+                <name>curl</name>
+            </extension>
+            <extension>
+                <name>gd</name>
+            </extension>
+            <extension>
+                <name>json</name>
+            </extension>
+            <extension>
+                <name>simplexml</name>
+            </extension>
+            <extension>
+                <name>libxml</name>
+            </extension>
+            <extension>
+                <name>ctype</name>
+            </extension>
 
-      <directive>
-			<name>memory_limit</name>
-			<min>64M</min>
-		</directive>
-    </required>
-  </dependencies>
-  <parameters>
-    <parameter id="DB_HOST"
-    display="Database Connection.Database Host"
-    required="true" type="string">
-      <description>
-        You can specify server port, ex.: localhost:3307 If
-        you are not using default UNIX socket, you can specify it
-        here instead of host, ex.:
-        /var/run/mysqld/mysqld.sock
-      </description>
-    </parameter>
-    <parameter id="DB_DATABASE"
-    display="Database Connection.Database Name"
-    required="true" type="string">
-      <defaultvalue>concrete5</defaultvalue>
-      <description>
+            <directive>
+                <name>memory_limit</name>
+                <min>64M</min>
+            </directive>
+        </required>
+    </dependencies>
+    <parameters>
+        <parameter id="DB_HOST"
+                   display="Database Connection.Database Host"
+                   required="true" type="string">
+            <description>
+                You can specify server port, ex.: localhost:3307 If
+                you are not using default UNIX socket, you can specify it
+                here instead of host, ex.:
+                /var/run/mysqld/mysqld.sock
+            </description>
+        </parameter>
+        <parameter id="DB_DATABASE"
+                   display="Database Connection.Database Name"
+                   required="true" type="string">
+            <defaultvalue>concrete5</defaultvalue>
+            <description>
 
-      </description>
-    </parameter>
-    <parameter id="DB_USERNAME"
-    display="Database Connection.User Name"
-    required="true" type="string">
-      <defaultvalue>root</defaultvalue>
-      <description>
+            </description>
+        </parameter>
+        <parameter id="DB_USERNAME"
+                   display="Database Connection.User Name"
+                   required="true" type="string">
+            <defaultvalue>root</defaultvalue>
+            <description>
 
-      </description>
-    </parameter>
-    <parameter id="DB_PASSWORD"
-    display="Database Connection.User Password"
-    required="false" type="password">
-      <defaultvalue></defaultvalue>
-      <description>
+            </description>
+        </parameter>
+        <parameter id="DB_PASSWORD"
+                   display="Database Connection.User Password"
+                   required="false" type="password">
+            <defaultvalue></defaultvalue>
+            <description>
 
-      </description>
-    </parameter>
-    <parameter id="ADMIN_PASSWORD"
-               display="admin user Password"
-               required="true" type="password">
-      <defaultvalue></defaultvalue>
-      <description>
+            </description>
+        </parameter>
+        <parameter id="ADMIN_PASSWORD"
+                   display="admin user Password"
+                   required="true" type="password">
+            <defaultvalue></defaultvalue>
+            <description>
 
-      </description>
-    </parameter>
-    <parameter id="ADMIN_EMAIL"
-               display="admin user Email"
-               required="true" type="string">
-      <defaultvalue></defaultvalue>
-      <description>
+            </description>
+        </parameter>
+        <parameter id="ADMIN_EMAIL"
+                   display="admin user Email"
+                   required="true" type="string">
+            <defaultvalue></defaultvalue>
+            <description>
 
-      </description>
-    </parameter>
-  </parameters>
+            </description>
+        </parameter>
+    </parameters>
+    <persistentresources>
+        <resource>data/application</resource>
+        <resource>data/packages</resource>
+    </persistentresources>
 </package>
 

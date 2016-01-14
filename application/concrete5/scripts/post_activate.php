@@ -3,7 +3,7 @@
  * is activated, for example by removing a "Down for Maintenance" message
  * set in Pre-activate.
  * The following environment variables are accessable to the script:
- * 
+ *
  * - ZS_RUN_ONCE_NODE - a Boolean flag stating whether the current node is
  *   flagged to handle "Run Once" actions. In a cluster, this flag will only be set when
  *   the script is executed on once cluster member, which will allow users to write
@@ -24,4 +24,45 @@
  *   being updated, if any. If this is a new installation, this variable will be
  *   empty. This is useful to detect update scenarios and handle upgrades / downgrades
  *   in hook scripts
- */  
+ */
+
+// Start concrete5
+$cms = require __DIR__ . "/start.php";
+$output = new Symfony\Component\Console\Output\ConsoleOutput();
+
+try {
+    $output->writeln('Configuring concrete5');
+    \Config::save('concrete.session.handler', 'database');
+
+    $output->writeln('Caching Doctrine Proxy Classes');
+
+    $em = ORM::entityManager();
+    $config = $em->getConfiguration();
+    if (is_object($cache = $config->getMetadataCacheImpl())) {
+        $cache->flushAll();
+    }
+
+    $dbm = Core::make('database/structure', array(\Database::createEntityManager()));
+    $dbm->destroyProxyClasses('ApplicationSrc');
+    if ($dbm->hasEntities()) {
+        $dbm->generateProxyClasses();
+    }
+
+    $output->writeln('Set permissions');
+
+    exec("chmod -R g+w " . escapeshellcmd(getenv('ZS_APPLICATION_BASE_DIR')));
+    exec("chmod -R 777 " . escapeshellcmd(DIR_BASE . DIRECTORY_SEPARATOR . 'application' . DIRECTORY_SEPARATOR . 'config'));
+    exec("chmod -R 777 " . escapeshellcmd(DIR_BASE . DIRECTORY_SEPARATOR . 'application' . DIRECTORY_SEPARATOR . 'files'));
+    exec("chmod -R 777 " . escapeshellcmd(DIR_BASE . DIRECTORY_SEPARATOR . 'packages'));
+
+    $output->writeln('completed');
+} catch (\Exception $e) {
+    $output->writeln($e->getMessage());
+    $output->getErrorOutput()->writeln($e->getMessage());
+
+    error_log($e->getMessage());
+
+    die(1);
+}
+
+die(0);
