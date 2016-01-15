@@ -2,10 +2,10 @@
 <package version="2.0" xmlns="http://www.zend.com/server/deployment-descriptor/1.0">
     <type>application</type>
     <name>concrete5</name>
-    <summary>concrete5 short description</summary>
-    <description>concrete5 long description</description>
+    <summary>concrete5</summary>
+    <description>Installs the concrete5 content management system application.</description>
     <version>
-        <release>5.7.4.2</release>
+        <release>5.7.5.4</release>
     </version>
     <eula>data/LICENSE.TXT</eula>
     <appdir>data</appdir>
