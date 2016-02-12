@@ -9,7 +9,7 @@ function install_concrete5(\Symfony\Component\Console\Output\Output $output) {
         '--db-password' => getenv('ZS_DB_PASSWORD'),
         '--db-database' => getenv('ZS_DB_DATABASE'),
         '--site' => 'concrete5 Site',
-        '--starting-point' => 'elemental_full',
+        '--starting-point' => 'elemental_blank',
         '--admin-email' => getenv('ZS_ADMIN_EMAIL'),
         '--admin-password' => getenv('ZS_ADMIN_PASSWORD'),
         '--attach' => true
