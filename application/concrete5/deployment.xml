@@ -5,7 +5,7 @@
     <summary>concrete5</summary>
     <description>Installs the concrete5 content management system application.</description>
     <version>
-        <release>5.7.5.4</release>
+        <release>5.7.5.6</release>
     </version>
     <eula>data/LICENSE.TXT</eula>
     <appdir>data</appdir>
